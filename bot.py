@@ -54,13 +54,34 @@ async def handle_callback(request: Request):
         raise HTTPException(status_code=400, detail="Invalid signature")
 
     for event in events:
-      # if event.message.text in ["人員管理", "人員"]:
-        await line_bot_api.reply_message(
-            ReplyMessageRequest(
-                reply_token=event.reply_token,
-                messages=[TextMessage(text=event.message.text)]
+        if event.message.text == "任務規則":
+            await line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text="任務店家分成A、B, 累積在A和B店各一次消費,任務數量會+1,當完成5個任務數量後,則可以取贈品🎁喔！")]
+                )
             )
-        )
+        elif event.message.text == "任務進度":
+            await line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text=event.message.text)]
+                )
+            )
+        elif event.message.text == "美食推薦":
+            await line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text=event.message.text)]
+                )
+            )
+        else:
+            await line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text="請點選下列選單，我才能告訴你天母有什麼好吃好玩的喔！")]
+                )
+            )
 
     return 'OK'
 
