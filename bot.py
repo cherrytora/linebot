@@ -2,6 +2,9 @@ import os
 import uvicorn
 
 from fastapi import Request, FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from linebot import (
     WebhookParser
@@ -34,12 +37,20 @@ configuration = Configuration(
 
 app = FastAPI()
 
+# liff page
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/liff", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("liff.html", {"request": request})
+
+# bot
 async_api_client = AsyncApiClient(configuration)
 line_bot_api = AsyncMessagingApi(async_api_client)
 parser = WebhookParser(channel_secret)
 
-
-@app.post("/callback")
+@app.post("/")
 async def handle_callback(request: Request):
     signature = request.headers['X-Line-Signature']
 
@@ -53,6 +64,7 @@ async def handle_callback(request: Request):
         raise HTTPException(status_code=400, detail="Invalid signature")
 
     for event in events:
+        print(event)
         if event.message.text == "任務規則":
             await line_bot_api.reply_message(
                 ReplyMessageRequest(
@@ -72,6 +84,14 @@ async def handle_callback(request: Request):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[TextMessage(text=event.message.text)]
+                )
+            )
+        # 這邊要改成店家名稱list
+        elif event.message.text == "Hello World":
+            await line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text="任務集點成功！")]
                 )
             )
         else:
