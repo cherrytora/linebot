@@ -1,95 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- LIFF SDK CDN include -->
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <!-- jquery CDN include -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /*垂直置中*/
-            justify-content: center; /* 水平置中 */
-            height: 100vh; /* 100%視窗高度 */
-        }
-
-        #qrcode_string {
-            font-size: 18px;
-        }
-
-        button {
-            margin-top: 10px; /* 頂部距離 */
-        }
-        button img {
-            width: 50px; /* 圖片寬度 */
-            height: auto; /* 保持長寬比例 */
-        }
-
-        a {
-            font-size: 100px; /* 字體大小 */
-            font-weight: bold;
-        }
-    </style>
-
-</head>
-
-<body>
-    <div class="topnav">
-    </div>
-    <script>
-        liff.init({
-            liffId: '2000727269-bRJrdrE4',
-            withLoginOnExternalBrowser: true,
-        }).then(() => {
-            // Start to use liff's api
-            openQRCodeReader()
-        });
-
-        var globalResult = null;
-
-        function openQRCodeReader() {
-            liff
-                .scanCodeV2()
-                .then((result) => {
-                    globalResult = result.value;
-                    $("#qrcode_string").text(result.value);
-                })
-                .catch((error) => {
-                    $("#qrcode_string").text(error);
-                    console.log("錯誤", error);
-                });
-        }
-
-        function sendMessage() {
-            liff
-                .sendMessages([
-                    {
-                        type: "text",
-                        text: globalResult,
-                    },
-                ])
-                .then(() => {
-                    console.log("訊息已送出");
-                })
-                .catch((err) => {
-                    $("#qrcode_string").text(err);
-                    console.log("錯誤", err);
-                });
-            liff.closeWindow();
-        }
-
-    </script>
-    <div class="container">
-        <a id="qrcode_string"></a>
-        <button onclick="sendMessage()">
-            <h2>消費確認</h2>
-            <img src="static/verified.png" alt="按鈕">
-        </button>
-    </div>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <!-- <title>Agency - Start Bootstrap Theme</title> -->
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/styles.css" rel="stylesheet" />
+        <!-- LIFF SDK CDN include -->
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        <!-- jquery CDN include -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    </head>
+    <body id="page-top">
+        <script>
+            liff.init({
+                liffId: '2000727269-bRJrdrE4',
+                withLoginOnExternalBrowser: true,
+            }).then(() => {
+                // Start to use liff's api
+                openQRCodeReader()
+            });
+    
+            var globalResult = null;
+    
+            function openQRCodeReader() {
+                liff
+                    .scanCodeV2()
+                    .then((result) => {
+                        globalResult = result.value;
+                        $("#qrcode_string").text(result.value);
+                    })
+                    .catch((error) => {
+                        $("#qrcode_string").text(error);
+                        console.log("錯誤", error);
+                    });
+            }
+    
+            function sendMessage() {
+                liff
+                    .sendMessages([
+                        {
+                            type: "text",
+                            text: globalResult,
+                        },
+                    ])
+                    .then(() => {
+                        console.log("訊息已送出");
+                    })
+                    .catch((err) => {
+                        $("#qrcode_string").text(err);
+                        console.log("錯誤", err);
+                    });
+                liff.closeWindow();
+            }
+    
+        </script>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">消費店家</div>
+                <div id="qrcode_string" class="masthead-heading text-uppercase"></div>
+                <button class="btn btn-primary btn-xl text-uppercase" onclick="sendMessage()">確認</button>
+            </div>
+        </header>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
 </html>
