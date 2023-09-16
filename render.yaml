@@ -17,3 +17,4 @@ services:
   network:
   - port: 8000
     protocol: http
+    host: 0.0.0.0
