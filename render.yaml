@@ -16,5 +16,4 @@ services:
     sync: false
   network:
   - port: 8000
-    protocol: https
-    host: 0.0.0.0
+    protocol: http
