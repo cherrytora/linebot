@@ -2,11 +2,11 @@ services:
 - type: web
   name: linebot_for_demo
   env: python
-  repo: https://github.com/line/line-bot-sdk-python.git
+  repo: https://github.com/cherrytora/linebot
   buildCommand: pip install --upgrade pip && pip install -r requirements.txt && pip install uvicorn
   startCommand: python bot.py
   plan: free
-  autoDeploy: false
+  autoDeploy: true
   envVars:
   - key: PYTHON_VERSION 
     value: 3.11.5
