@@ -1,13 +1,14 @@
 from google.oauth2.service_account import Credentials
 import gspread
 import pandas as pd
+import os
 
 
 def init():
     # google-api setup
     scope = ['https://www.googleapis.com/auth/spreadsheets']
     creds = Credentials.from_service_account_file(
-        "sheet/gmail-api-81225-f2d876f6c9b6.json", scopes=scope)
+        "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json", scopes=scope)
     gs = gspread.authorize(creds)
     sheet = gs.open_by_url(
         'https://docs.google.com/spreadsheets/d/10YKEf2rSzc7REUuZWQjCqa_zTQkSrr6JSY61QViCSvo/edit#gid=912871586')
