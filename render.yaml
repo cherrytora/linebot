@@ -1,0 +1,14 @@
+services:
+- type: web
+  name: linebot_for_demo
+  env: python=3.8
+  repo: https://github.com/line/line-bot-sdk-python.git
+  buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+  startCommand: python bot.py
+  plan: free
+  autoDeploy: false
+  envVars:
+  - key: LINE_CHANNEL_ACCESS_TOKEN
+    sync: false
+  - key: LINE_CHANNEL_SECRET
+    sync: false
