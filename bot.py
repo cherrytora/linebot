@@ -153,4 +153,4 @@ async def handle_callback(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run("bot:app", reload=True, host=0.0.0.0, , port=8000)
+    uvicorn.run("bot:app", reload=True, host="0.0.0.0", port=8000)

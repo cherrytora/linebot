@@ -6,7 +6,7 @@ services:
   buildCommand: pip install --upgrade pip && pip install -r requirements.txt && pip install uvicorn
   startCommand: python bot.py
   plan: free
-  autoDeploy: true
+  autoDeploy: false
   envVars:
   - key: PYTHON_VERSION 
     value: 3.11.5
