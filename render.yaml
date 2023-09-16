@@ -9,7 +9,7 @@ services:
   autoDeploy: false
   envVars:
   - key: PYTHON_VERSION 
-    value: 3.10
+    value: 3.11.5
   - key: LINE_CHANNEL_ACCESS_TOKEN
     sync: false
   - key: LINE_CHANNEL_SECRET
