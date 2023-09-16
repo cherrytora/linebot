@@ -1,5 +1,5 @@
 import os
-# import uvicorn
+import uvicorn
 import pandas as pd
 from datetime import datetime
 import pytz
