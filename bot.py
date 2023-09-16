@@ -152,5 +152,5 @@ async def handle_callback(request: Request):
     return 'OK'
 
 
-# if __name__ == "__main__":
-#     uvicorn.run("bot:app", reload=True)
+if __name__ == "__main__":
+    uvicorn.run("bot:app", reload=True)
