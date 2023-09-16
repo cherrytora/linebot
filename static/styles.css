@@ -10946,9 +10946,10 @@ header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 31rem;
   text-align: center;
-  color: #fff;
-  background-image: url("/static/header-bg.jpeg");
-  background-repeat: repeat;
+  color: white;
+  background-color: black;
+  /* background-image: url("static/header-bg.png"); */
+  /* background-repeat: repeat; */
   /* background-attachment: scroll; */
   background-position: center center;
   background-size: contain;

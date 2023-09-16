@@ -3,6 +3,7 @@ import uvicorn
 import pandas as pd
 from datetime import datetime
 import pytz
+import json
 from dotenv import load_dotenv
 
 from fastapi import Request, FastAPI, HTTPException
@@ -10,7 +11,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from linebot import (
+from linebot.v3 import (
     WebhookParser
 )
 from linebot.v3.messaging import (
@@ -18,7 +19,8 @@ from linebot.v3.messaging import (
     AsyncMessagingApi,
     Configuration,
     ReplyMessageRequest,
-    TextMessage
+    TextMessage,
+    FlexMessage, LocationMessage
 )
 from linebot.v3.exceptions import (
     InvalidSignatureError
@@ -26,6 +28,8 @@ from linebot.v3.exceptions import (
 from linebot.v3.webhooks import (
     MessageEvent, PostbackEvent
 )
+
+from linebot.v3.messaging.models import FlexContainer
 
 import replies
 from sheet.gsheet import write_records, get_logs
@@ -77,18 +81,26 @@ async def handle_callback(request: Request):
 
     for event in events:
         print(event)
-        if event.type == "postback":
+        if isinstance(event, PostbackEvent):
             if event.postback.data == "天母西三叉路":
                 pass
-                # await line_bot_api.reply_message(
-                # replies.food_recommend(event.reply_token)
-                # )
             elif event.postback.data == "天母西路":
-                pass
+                msg = json.load(open('data/rout1.json', 'r', encoding='utf-8'))
+                message = FlexMessage(
+                    alt_text="天母東路", contents=FlexContainer.from_dict(msg))
+                await line_bot_api.reply_message(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[message]
+                    )
+                )
             elif event.postback.data == "天母東路":
                 pass
+            else:
+                await line_bot_api.reply_message(
+                    replies.postback(event.postback.data, event.reply_token))
 
-        elif event.type == "message":
+        elif isinstance(event, MessageEvent):
             if event.message.text == "任務規則":
                 await line_bot_api.reply_message(
                     ReplyMessageRequest(
@@ -99,12 +111,15 @@ async def handle_callback(request: Request):
                 )
 
             elif event.message.text == "任務進度":
-                txt = get_logs(str(event.source.user_id))
-                # 這裡要寫flex
+                # txt = get_logs(str(event.source.user_id))
+                # 這裡寫一個py檔，讓他return dic
+                msg = json.load(open('data/flex.json', 'r', encoding='utf-8'))
+                message = FlexMessage(
+                    alt_text="任務進度", contents=FlexContainer.from_dict(msg))
                 await line_bot_api.reply_message(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text=str(txt))]
+                        messages=[message]
                     )
                 )
 

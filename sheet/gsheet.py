@@ -29,6 +29,3 @@ def get_logs(user_id):
         return "任務尚未開始"
     else:
         return list(mission["SHOP_ID"])
-
-
-get_logs("Ubde456327c21bd7d0aae2f9f37d873d")

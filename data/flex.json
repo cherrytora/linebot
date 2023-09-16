@@ -1,0 +1,98 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "任務進度",
+          "weight": "bold",
+          "size": "xl",
+          "style": "normal",
+          "align": "center"
+        },
+        {
+          "type": "text",
+          "text": "路線：天母西路",
+          "align": "center"
+        },
+        {
+          "type": "box",
+          "layout": "baseline",
+          "margin": "none",
+          "contents": [
+            {
+              "type": "icon",
+              "size": "4xl",
+              "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+            },
+            {
+              "type": "icon",
+              "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+              "size": "4xl"
+            }
+          ],
+          "spacing": "lg",
+          "paddingAll": "none",
+          "paddingStart": "none",
+          "offsetStart": "none",
+          "borderWidth": "none",
+          "cornerRadius": "none",
+          "justifyContent": "center",
+          "offsetTop": "md"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "lg",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "text",
+              "text": "永福小吃店",
+              "align": "center",
+              "size": "xl"
+            },
+            {
+              "type": "text",
+              "text": "櫛瓜咖啡",
+              "align": "center",
+              "size": "xl"
+            },
+            {
+              "type": "separator"
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "查看任務規則",
+            "text": "任務規則"
+          }
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "查看任務路線",
+            "text": "任務路線"
+          }
+        }
+      ],
+      "flex": 0
+    }
+  }
