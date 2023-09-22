@@ -32,7 +32,8 @@ from linebot.v3.webhooks import (
 from linebot.v3.messaging.models import FlexContainer
 
 import replies
-from sheet.gsheet import write_records, get_logs
+from sheet.gsheet import write_records
+from sheet.mission import mission_flex
 
 
 load_dotenv()
@@ -80,21 +81,20 @@ async def handle_callback(request: Request):
         raise HTTPException(status_code=400, detail="Invalid signature")
 
     for event in events:
-        print(event)
         if isinstance(event, PostbackEvent):
-            if event.postback.data == "天母西三叉路":
+            if event.postback.data == "忠誠路":
                 pass
             elif event.postback.data == "天母西路":
                 msg = json.load(open('data/rout1.json', 'r', encoding='utf-8'))
                 message = FlexMessage(
-                    alt_text="天母東路", contents=FlexContainer.from_dict(msg))
+                    alt_text="天母西路", contents=FlexContainer.from_dict(msg))
                 await line_bot_api.reply_message(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
                         messages=[message]
                     )
                 )
-            elif event.postback.data == "天母東路":
+            elif event.postback.data == "德行東路":
                 pass
             else:
                 await line_bot_api.reply_message(
@@ -113,7 +113,9 @@ async def handle_callback(request: Request):
             elif event.message.text == "任務進度":
                 # txt = get_logs(str(event.source.user_id))
                 # 這裡寫一個py檔，讓他return dic
-                msg = json.load(open('data/flex.json', 'r', encoding='utf-8'))
+                # msg = json.load(open('data/flex.json', 'r', encoding='utf-8'))
+                msg = mission_flex(event.source.user_id)
+                print(msg)
                 message = FlexMessage(
                     alt_text="任務進度", contents=FlexContainer.from_dict(msg))
                 await line_bot_api.reply_message(

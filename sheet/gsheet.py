@@ -1,14 +1,15 @@
 from google.oauth2.service_account import Credentials
 import gspread
 import pandas as pd
-import os
+
+f = "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json"
+# f = "sheet/gmail-api-81225-f2d876f6c9b6.json"
 
 
 def init():
     # google-api setup
     scope = ['https://www.googleapis.com/auth/spreadsheets']
-    creds = Credentials.from_service_account_file(
-        "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json", scopes=scope)
+    creds = Credentials.from_service_account_file(f, scopes=scope)
     gs = gspread.authorize(creds)
     sheet = gs.open_by_url(
         'https://docs.google.com/spreadsheets/d/10YKEf2rSzc7REUuZWQjCqa_zTQkSrr6JSY61QViCSvo/edit#gid=912871586')
@@ -27,6 +28,6 @@ def get_logs(user_id):
     logs = pd.DataFrame(worksheet.get_all_records())
     mission = logs[logs["LINE_ID"] == user_id]
     if mission.empty:
-        return "任務尚未開始"
+        return mission
     else:
-        return list(mission["SHOP_ID"])
+        return mission["SHOP_ID"]
