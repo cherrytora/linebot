@@ -126,7 +126,7 @@ def mission_flex(user_id):
         return not_stat
     else:
         mission = list(mission)
-        mission = mission[-3]
+        mission = mission[-3:]
         for i in range(len(mission)):
             icon_list[i] = "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
             mission_list.append(mission[i])
