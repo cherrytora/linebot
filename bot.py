@@ -83,7 +83,15 @@ async def handle_callback(request: Request):
     for event in events:
         if isinstance(event, PostbackEvent):
             if event.postback.data == "忠誠路":
-                pass
+                msg = json.load(open('data/rout2.json', 'r', encoding='utf-8'))
+                message = FlexMessage(
+                    alt_text="天母西路", contents=FlexContainer.from_dict(msg))
+                await line_bot_api.reply_message(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[message]
+                    )
+                )
             elif event.postback.data == "天母西路":
                 msg = json.load(open('data/rout1.json', 'r', encoding='utf-8'))
                 message = FlexMessage(
@@ -95,7 +103,15 @@ async def handle_callback(request: Request):
                     )
                 )
             elif event.postback.data == "德行東路":
-                pass
+                msg = json.load(open('data/rout3.json', 'r', encoding='utf-8'))
+                message = FlexMessage(
+                    alt_text="天母西路", contents=FlexContainer.from_dict(msg))
+                await line_bot_api.reply_message(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[message]
+                    )
+                )
             else:
                 await line_bot_api.reply_message(
                     replies.postback(event.postback.data, event.reply_token))

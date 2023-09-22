@@ -1,0 +1,304 @@
+{
+    "type": "bubble",
+    "size": "kilo",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "路線",
+              "color": "#CDCDB4",
+              "size": "sm",
+              "align": "center"
+            },
+            {
+              "type": "text",
+              "text": "忠誠路",
+              "color": "#ffffff",
+              "size": "xl",
+              "flex": 4,
+              "weight": "bold",
+              "align": "center"
+            }
+          ]
+        }
+      ],
+      "paddingAll": "20px",
+      "backgroundColor": "#4876FF",
+      "spacing": "md",
+      "height": "100px",
+      "paddingTop": "22px"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "第一站",
+              "size": "xxs",
+              "gravity": "center"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "filler"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [],
+                  "cornerRadius": "30px",
+                  "height": "12px",
+                  "width": "12px",
+                  "borderColor": "#EF454D",
+                  "borderWidth": "2px"
+                },
+                {
+                  "type": "filler"
+                }
+              ],
+              "flex": 0
+            },
+            {
+              "type": "text",
+              "text": "羽果有限公司",
+              "gravity": "center",
+              "flex": 4,
+              "size": "sm",
+              "action": {
+                "type": "postback",
+                "label": "action",
+                "data": "羽果有限公司"
+              }
+            }
+          ],
+          "spacing": "lg",
+          "cornerRadius": "30px",
+          "margin": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "contents": [
+                {
+                  "type": "filler"
+                }
+              ],
+              "flex": 1
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "filler"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [],
+                      "width": "2px",
+                      "backgroundColor": "#B7B7B7"
+                    },
+                    {
+                      "type": "filler"
+                    }
+                  ],
+                  "flex": 1
+                }
+              ],
+              "width": "12px"
+            },
+            {
+              "type": "text",
+              "text": "Walk 6min / Youbike 1min",
+              "gravity": "center",
+              "flex": 4,
+              "size": "xs",
+              "color": "#8c8c8c"
+            }
+          ],
+          "spacing": "lg",
+          "height": "64px"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "第二站",
+                  "gravity": "center",
+                  "size": "xxs"
+                }
+              ],
+              "flex": 1
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "filler"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [],
+                  "cornerRadius": "30px",
+                  "width": "12px",
+                  "height": "12px",
+                  "borderWidth": "2px",
+                  "borderColor": "#6486E3"
+                },
+                {
+                  "type": "filler"
+                }
+              ],
+              "flex": 0
+            },
+            {
+              "type": "text",
+              "text": "品藝餐飲有限公司",
+              "gravity": "center",
+              "flex": 4,
+              "size": "sm",
+              "action": {
+                "type": "postback",
+                "label": "action",
+                "data": "品藝餐飲有限公司"
+              }
+            }
+          ],
+          "spacing": "lg",
+          "cornerRadius": "30px"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "contents": [
+                {
+                  "type": "filler"
+                }
+              ],
+              "flex": 1
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "filler"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [],
+                      "width": "2px",
+                      "backgroundColor": "#6486E3"
+                    },
+                    {
+                      "type": "filler"
+                    }
+                  ],
+                  "flex": 1
+                }
+              ],
+              "width": "12px"
+            },
+            {
+              "type": "text",
+              "text": "Walk 1min / Youbike 1min",
+              "gravity": "center",
+              "flex": 4,
+              "size": "xs",
+              "color": "#8c8c8c"
+            }
+          ],
+          "spacing": "lg",
+          "height": "64px"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "第三站",
+              "gravity": "center",
+              "size": "xxs"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "filler"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [],
+                  "cornerRadius": "30px",
+                  "width": "12px",
+                  "height": "12px",
+                  "borderColor": "#6486E3",
+                  "borderWidth": "2px"
+                },
+                {
+                  "type": "filler"
+                }
+              ],
+              "flex": 0
+            },
+            {
+              "type": "text",
+              "text": "王十字咖啡工坊",
+              "gravity": "center",
+              "flex": 4,
+              "size": "sm",
+              "action": {
+                "type": "postback",
+                "label": "action",
+                "data": "王十字咖啡工坊"
+              }
+            }
+          ],
+          "spacing": "lg",
+          "cornerRadius": "30px"
+        }
+      ]
+    }
+  }
