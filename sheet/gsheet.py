@@ -31,3 +31,11 @@ def get_logs(user_id):
         return mission
     else:
         return mission["SHOP_ID"]
+
+
+def delete_logs(user_id):
+    worksheet = init()
+    cell = worksheet.find(user_id)
+    worksheet.delete_row(cell.row)
+    cell = worksheet.find(user_id)
+    worksheet.delete_row(cell.row)

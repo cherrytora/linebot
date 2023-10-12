@@ -20,7 +20,7 @@ from linebot.v3.messaging import (
     Configuration,
     ReplyMessageRequest,
     TextMessage,
-    FlexMessage, LocationMessage
+    FlexMessage
 )
 from linebot.v3.exceptions import (
     InvalidSignatureError
@@ -32,9 +32,10 @@ from linebot.v3.webhooks import (
 from linebot.v3.messaging.models import FlexContainer
 
 import replies
-from sheet.gsheet import write_records
+from sheet.gsheet import write_records, delete_logs
 from sheet.mission import mission_flex
 
+# https://linebot-for-demo.onrender.com
 
 load_dotenv()
 
@@ -122,7 +123,7 @@ async def handle_callback(request: Request):
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
                         messages=[TextMessage(
-                            text="任務店家分成A、B, 累積在A和B店各一次消費,任務數量會+1,當完成5個任務數量後,則可以取贈品🎁喔！")]
+                            text="只要到同一條路線的兩家店消費後掃QR code，就可以直接參加活動，集點取兌換券換贈品🎁喔！")]
                     )
                 )
 
@@ -131,7 +132,6 @@ async def handle_callback(request: Request):
                 # 這裡寫一個py檔，讓他return dic
                 # msg = json.load(open('data/flex.json', 'r', encoding='utf-8'))
                 msg = mission_flex(event.source.user_id)
-                print(msg)
                 message = FlexMessage(
                     alt_text="任務進度", contents=FlexContainer.from_dict(msg))
                 await line_bot_api.reply_message(
@@ -145,6 +145,9 @@ async def handle_callback(request: Request):
                 await line_bot_api.reply_message(
                     replies.food_recommend(event.reply_token)
                 )
+
+            elif event.message.text == "!!恭喜!! 完成任務##":
+                delete_logs(event.source.user_id)
 
             elif event.message.text in store:
                 now = datetime.now(pytz.timezone("Asia/Taipei"))
@@ -171,4 +174,4 @@ async def handle_callback(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run("bot:app", reload=True, host="0.0.0.0", port=8000)
+    uvicorn.run("bot:app", host="0.0.0.0", port=8000)

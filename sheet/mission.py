@@ -1,4 +1,3 @@
-import pandas as pd
 from sheet.gsheet import get_logs
 
 f = "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json"
@@ -32,11 +31,6 @@ def mission_flex(user_id):
                     "layout": "baseline",
                     "margin": "md",
                     "contents": [
-                        {
-                            "type": "icon",
-                            "size": "xl",
-                            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
-                        },
                         {
                             "type": "icon",
                             "size": "xl",
@@ -116,22 +110,96 @@ def mission_flex(user_id):
             "flex": 0
         }
     }
+
+    mission_complete = {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "任務完成",
+                    "weight": "bold",
+                    "size": "xl",
+                    "align": "center"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "margin": "md",
+                    "contents": [
+                        {
+                            "type": "icon",
+                            "size": "xl",
+                            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                        },
+                        {
+                            "type": "icon",
+                            "size": "xl",
+                            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                        }
+                    ],
+                    "justifyContent": "center"
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "太棒了！完成任務囉！",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "點完成任務按鈕領取兌換券喔！",
+                            "align": "center"
+                        }
+                    ]
+                }
+            ]
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                        "type": "message",
+                        "label": "完成任務",
+                        "text": "!!恭喜!! 完成任務##"
+                    }
+                }
+            ],
+            "flex": 0
+        }
+    }
+
     icon_list = ["https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png",
-                 "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png",
-                 "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"]
+                 "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+                 ]
     mission_list = []
     mission = get_logs(user_id)
     print(mission)
     if mission.empty:
         return not_stat
+    elif len(list(mission)) >= 2:
+        return mission_complete
     else:
         mission = list(mission)
-        mission = mission[-3:]
+        # mission = mission[-2:]
         for i in range(len(mission)):
             icon_list[i] = "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
             mission_list.append(mission[i])
 
-        mission_list.extend("尚未完成" for i in range(3-len(mission_list)))
+        mission_list.extend("尚未完成" for i in range(2-len(mission_list)))
         flex_dic = {
             "type": "bubble",
             "header": {
@@ -168,11 +236,6 @@ def mission_flex(user_id):
                                 "size": "xl",
                                 "url": icon_list[1]
                             },
-                            {
-                                "type": "icon",
-                                "size": "xl",
-                                "url": icon_list[2]
-                            }
                         ],
                         "justifyContent": "center"
                     },
@@ -223,28 +286,6 @@ def mission_flex(user_id):
                                         "size": "sm",
                                         "flex": 5,
                                         "text": mission_list[1]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "baseline",
-                                "spacing": "sm",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "第三站",
-                                        "color": "#aaaaaa",
-                                        "size": "sm",
-                                        "flex": 1
-                                    },
-                                    {
-                                        "type": "text",
-                                        "wrap": True,
-                                        "color": "#666666",
-                                        "size": "sm",
-                                        "flex": 5,
-                                        "text": mission_list[2]
                                     }
                                 ]
                             }
