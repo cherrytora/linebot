@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 import pytz
 import json
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from fastapi import Request, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
@@ -35,9 +35,7 @@ import replies
 from sheet.gsheet import write_records, delete_logs
 from sheet.mission import mission_flex
 
-# https://linebot-for-demo.onrender.com
-
-load_dotenv()
+# load_dotenv()
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
