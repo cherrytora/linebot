@@ -5,6 +5,7 @@ from linebot.v3.messaging import (
     PostbackAction
 )
 import pandas as pd
+from sheet.recommand import recommand
 
 
 def food_recommend(reply_token):
@@ -17,7 +18,7 @@ def food_recommend(reply_token):
                                           actions=[
                                                 PostbackAction(
                                                     label='最適合親子一起來的忠誠路👨‍👩‍👧‍👦',
-                                                    data="忠誠路",
+                                                    data="忠誠路"
                                                 ),
                                               PostbackAction(
                                                     label='元氣天母西🥳',
@@ -27,6 +28,22 @@ def food_recommend(reply_token):
                                                     label='美食排排站！德行東路～🍲',
                                                     data='德行東路')
                                           ]))])
+
+
+def next_recommand(txt):
+    r_list = recommand(txt)
+    actions = []
+    for i in r_list:
+        actions.append(PostbackAction(
+                       label=i,
+                       data=i))
+
+    msg = TemplateMessage(altText="下一站",
+                                  template=ButtonsTemplate(
+                                      title='下一站可以去哪裡😁',
+                                      text='點選店名看地圖喔！\n下面都走路10分鐘可以到的地方唷～',
+                                      actions=actions))
+    return msg
 
 
 def postback(name, reply_token):

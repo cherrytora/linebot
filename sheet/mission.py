@@ -1,7 +1,6 @@
 from sheet.gsheet import get_logs
 
 f = "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json"
-# f = "sheet/gmail-api-81225-f2d876f6c9b6.json"
 
 
 def mission_flex(user_id):

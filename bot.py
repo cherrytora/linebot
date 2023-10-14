@@ -128,9 +128,6 @@ async def handle_callback(request: Request):
                 )
 
             elif event.message.text == "任務進度":
-                # txt = get_logs(str(event.source.user_id))
-                # 這裡寫一個py檔，讓他return dic
-                # msg = json.load(open('data/flex.json', 'r', encoding='utf-8'))
                 msg = mission_flex(event.source.user_id)
                 message = FlexMessage(
                     alt_text="任務進度", contents=FlexContainer.from_dict(msg))
@@ -154,10 +151,12 @@ async def handle_callback(request: Request):
                 mission = ["None", str(event.source.user_id), str(
                     event.message.text), "Y", str(now)]
                 write_records(mission)
+                msg = replies.next_recommand(event.message.text)
                 await line_bot_api.reply_message(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text="任務集點成功！")]
+                        messages=[TextMessage(text="任務集點成功！"),
+                                  msg]
                     )
                 )
 

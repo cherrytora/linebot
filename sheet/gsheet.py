@@ -3,7 +3,6 @@ import gspread
 import pandas as pd
 
 f = "/etc/secrets/gmail-api-81225-f2d876f6c9b6.json"
-# f = "sheet/gmail-api-81225-f2d876f6c9b6.json"
 
 
 def init():
